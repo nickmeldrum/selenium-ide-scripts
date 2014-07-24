@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="https://www.amazon.co.uk/gp/dmusic/cloudplayer/player?ie=UTF8&ref_=gno_yam_cldplyr#searchSongs/searchTerm=rebirth+of+cool" />
+<title>Amazon music move artist from title into artist per album</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Amazon music move artist from title into artist per album</td></tr>
+</thead><tbody>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>//span[@class='countNumber']</td>
+	<td>numberOfSongsString</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>storedVars['numberOfSongsString'].substring(0, storedVars['numberOfSongsString'].indexOf(' ') + 1)</td>
+	<td>numberOfSongs</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>Number of songs in album: ${numberOfSongs}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>getEval</td>
+	<td>index = 1;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>while</td>
+	<td>index &lt;= ${numberOfSongs};</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>index</td>
+	<td>value</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${value}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>&quot;//div[@id='tableContainer']/div[2]/div/table/tbody/tr[&quot; + storedVars['value'] + &quot;]/td[4]/a&quot;</td>
+	<td>xpathToSongContextMenuClicker</td>
+</tr>
+<tr>
+	<td>waitForNotVisible</td>
+	<td>spinner</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=${xpathToSongContextMenuClicker}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Edit song info</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Edit song info</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>name=me_title</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeValue</td>
+	<td>name=me_title</td>
+	<td>titleString</td>
+</tr>
+<tr>
+	<td>storeValue</td>
+	<td>name=me_artistName</td>
+	<td>artistString</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>storedVars['titleString'].indexOf(&quot; - &quot;) != -1 || storedVars['titleString'].slice(-1) != &quot;)&quot;</td>
+	<td>dontChange</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>storedVars['artistString'] != &quot;Various Artists&quot;</td>
+	<td>dontChange</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=me_title</td>
+	<td>javascript{storedVars['titleString'].slice(0, storedVars['titleString'].lastIndexOf(&quot;(&quot;) - 1)}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=me_artistName</td>
+	<td>javascript{storedVars['titleString'].slice(storedVars['titleString'].lastIndexOf(&quot;(&quot;) + 1, -1)}</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>dontChange</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=OK</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>name=me_title</td>
+	<td></td>
+</tr>
+<tr>
+	<td>getEval</td>
+	<td>index++;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>endWhile</td>
+	<td></td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
