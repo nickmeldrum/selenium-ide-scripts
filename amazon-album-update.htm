@@ -22,8 +22,8 @@
 	<td>numberOfSongsString</td>
 </tr>
 <tr>
-	<td>store</td>
-	<td>javascript{storedVars['numberOfSongsString'].substring(0, storedVars['numberOfSongsString'].indexOf(' ') + 1)}</td>
+	<td>storeEval</td>
+	<td>storedVars['numberOfSongsString'].substring(0, storedVars['numberOfSongsString'].indexOf(' ') + 1)</td>
 	<td>numberOfSongs</td>
 </tr>
 <tr>
@@ -33,12 +33,12 @@
 </tr>
 <tr>
 	<td>getEval</td>
-	<td>index = 0;</td>
+	<td>index = 1;</td>
 	<td></td>
 </tr>
 <tr>
 	<td>while</td>
-	<td>index &lt; ${numberOfSongs};</td>
+	<td>index &lt; 2;</td>
 	<td></td>
 </tr>
 <tr>
@@ -57,8 +57,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>storeEval</td>
+	<td>&quot;//div[@id='tableContainer']/div[2]/div/table/tbody/tr[&quot; + storedVars['value'] + &quot;]/td[4]/a&quot;</td>
+	<td>xpathToSongContextMenuClicker</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${xpathToSongContextMenuClicker}</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
-	<td>//div[@id='tableContainer']/div[2]/div/table/tbody/tr['${infffdex}']/td[4]/a</td>
+	<td>xpath=${xpathToSongContextMenuClicker}</td>
 	<td></td>
 </tr>
 <tr>
@@ -77,8 +87,38 @@
 	<td></td>
 </tr>
 <tr>
+	<td>storeValue</td>
+	<td>name=me_title</td>
+	<td>titleString</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>storedVars['titleString']</td>
+	<td>newTitleString</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>storedVars['titleString']</td>
+	<td>newAlbumString</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=me_title</td>
+	<td>${newTitleString}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=me_artistName</td>
+	<td>${newAlbumString}</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1500</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
-	<td>link=Cancel</td>
+	<td>link=OK</td>
 	<td></td>
 </tr>
 <tr>
