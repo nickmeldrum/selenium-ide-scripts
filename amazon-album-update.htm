@@ -97,24 +97,14 @@
 	<td>dontChange</td>
 </tr>
 <tr>
-	<td>storeEval</td>
-	<td>storedVars['titleString'].split(&quot; - &quot;)[0]</td>
-	<td>newTitleString</td>
-</tr>
-<tr>
-	<td>storeEval</td>
-	<td>storedVars['titleString'].split(&quot; - &quot;)[1]</td>
-	<td>newAlbumString</td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>name=me_title</td>
-	<td>${newTitleString}</td>
+	<td>javascript{storedVars['titleString'].split(&quot; - &quot;)[0]}</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>name=me_artistName</td>
-	<td>${newAlbumString}</td>
+	<td>javascript{storedVars['titleString'].split(&quot; - &quot;)[1]}</td>
 </tr>
 <tr>
 	<td>pause</td>
