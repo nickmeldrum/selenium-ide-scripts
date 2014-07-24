@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="https://planner.royallondon.com/Login/?ReturnUrl=%252f" />
+<title>rlfp-register-singleperson-addincome</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">rlfp-register-singleperson-addincome</td></tr>
+</thead><tbody>
+<tr>
+	<td>storeEval</td>
+	<td>&quot;seleniumtest+&quot; + Math.random().toString(36).substring(2,12) + &quot;@nickmeldrum.com&quot;</td>
+	<td>testEmailAddress</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>Test case email address is: ${testEmailAddress}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/Login/?ReturnUrl=%2f</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=buildplan_name</td>
+	<td>SeleniumTester</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=buildplan_genderm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=buildplan_dobmonth</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=buildplan_dobyear</td>
+	<td>label=1980</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=buildplan_button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>EmailAddress</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=EmailAddress</td>
+	<td>javascript{storedVars['testEmailAddress']}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=ConfirmEmailAddress</td>
+	<td>javascript{storedVars['testEmailAddress']}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=Password</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=TermsAndConditionAccepted_IsChecked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>wizardSubmitButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>AddIncome</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>AddIncome</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>Employment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>Employment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>ValueAndFrequency_Value_TextBox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ValueAndFrequency_Value_TextBox</td>
+	<td>25000</td>
+</tr>
+<tr>
+	<td>fireEvent</td>
+	<td>ValueAndFrequency_Value_TextBox</td>
+	<td>blur</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>wizardSubmitButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>BonusValueAndFrequency_Value_TextBox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>wizardSubmitButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>PercentageIncrease_PercentRate_TextBox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>wizardSubmitButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id=&quot;wizard-question&quot;]/h3[text()=&quot;Is this correct?&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>wizardSubmitButton</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
