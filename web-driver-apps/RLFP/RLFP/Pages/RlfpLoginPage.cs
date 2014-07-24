@@ -1,37 +1,74 @@
+using OpenQA.Selenium;
+using RLFP.Model;
+using RLFP.WebDriver;
 using System;
 using System.Globalization;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
-using RLFP.Model;
 
 namespace RLFP.Pages {
-    public class RlfpLoginPage {
-        private readonly IWebDriver _driver;
+    public class RlfpLoginPage : Page {
+        public readonly BuildPlanPanel BuildPlanPanelForm;
 
-        public RlfpLoginPage(IWebDriver driver) {
-            _driver = driver;
+        public RlfpLoginPage(IWebDriver driver)
+            : base(driver, "/Login/?ReturnUrl=%2f") {
+            BuildPlanPanelForm = new BuildPlanPanel(this);
         }
 
-        public void Register(string name, Gender gender, DateTime monthOfBirth) {
-            _driver.Url = "https://planner.royallondon.com/Login/?ReturnUrl=%2f";
-            _driver.Navigate();
+        public class BuildPlanPanel {
+            private readonly RlfpLoginPage _parentPage;
 
-            var nameField = _driver.FindElement(By.Id("buildplan_name"));
-            nameField.SendKeys(name);
+            public string Name {
+                get { return _parentPage.Driver.GetInputElementText("buildplan_name"); }
+                set { _parentPage.Driver.SetInputElementText("buildplan_name", value); }
+            }
 
-            var maleGenderField = _driver.FindElement(By.Id("buildplan_genderm"));
-            maleGenderField.Click();
+            public Gender Gender {
+                get {
+                    if (_parentPage.Driver.GetRadioButtonState("buildplan_genderf")) return Gender.Female;
+                    return _parentPage.Driver.GetRadioButtonState("buildplan_genderm") ? Gender.Male : Gender.NotSelected;
+                }
+                set {
+                    switch (value) {
+                        case Gender.Female:
+                            _parentPage.Driver.SelectRadioButton("buildplan_genderf");
+                            break;
+                        case Gender.Male:
+                            _parentPage.Driver.SelectRadioButton("buildplan_genderm");
+                            break;
+                    }
+                }
+            }
 
-            var monthField = _driver.FindElement(By.Id("buildplan_dobmonth"));
-            var x = new SelectElement(monthField);
-            x.SelectByText(monthOfBirth.ToString("MMMM", CultureInfo.InvariantCulture));
+            public Month MonthOfBirth {
+                get {
+                    var value = _parentPage.Driver.GetSelectValue("buildplan_dobmonth");
+                    if (string.IsNullOrWhiteSpace(value)) return Month.NotSelected;
+                    return (Month)Enum.Parse(typeof(Month), value);
+                }
+                set {
+                    if (value == Month.NotSelected) return;
+                    _parentPage.Driver.SetSelectValue("buildplan_dobmonth", value.ToString());
+                }
+            }
 
-            var yearField = _driver.FindElement(By.Id("buildplan_dobyear"));
-            var y = new SelectElement(yearField);
-            y.SelectByText(monthOfBirth.Year.ToString(CultureInfo.InvariantCulture));
+            public int? YearOfBirth {
+                get {
+                    var value = _parentPage.Driver.GetSelectValue("buildplan_dobyear");
+                    if (string.IsNullOrWhiteSpace(value)) return null;
+                    return int.Parse(value);
+                }
+                set {
+                    if (!value.HasValue) return;
+                    _parentPage.Driver.SetSelectValue("buildplan_dobyear", value.Value.ToString(CultureInfo.InvariantCulture));
+                }
+            }
 
-            var submitForm = _driver.FindElement(By.Id("buildplan_button"));
-            submitForm.Click();
+            public BuildPlanPanel(RlfpLoginPage parentPage) {
+                _parentPage = parentPage;
+            }
+
+            public RlfpRegisterPage Submit() {
+                return _parentPage.Driver.Submit<RlfpRegisterPage>("buildplan_button");
+            }
         }
     }
 }
